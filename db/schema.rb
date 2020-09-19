@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 2020_09_19_052842) do
     t.string "name"
     t.integer "percent"
     t.integer "num_of_items"
-    t.bigint "merchants_id"
+    t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["merchants_id"], name: "index_discounts_on_merchants_id"
+    t.index ["merchant_id"], name: "index_discounts_on_merchant_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2020_09_19_052842) do
     t.index ["merchant_id"], name: "index_users_on_merchant_id"
   end
 
-  add_foreign_key "discounts", "merchants", column: "merchants_id"
+  add_foreign_key "discounts", "merchants"
   add_foreign_key "items", "merchants"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
