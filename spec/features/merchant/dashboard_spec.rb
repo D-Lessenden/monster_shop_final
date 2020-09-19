@@ -76,11 +76,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content("Dicount Name")
       expect(page).to have_content("Number of Items")
       expect(page).to have_content("Percentage")
-      expect(page).to have_content("Create Discount")
-
-
-
+      expect(page).to have_link("Create Discount")
     end
-
   end
 end
