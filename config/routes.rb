@@ -44,9 +44,9 @@ Rails.application.routes.draw do
     get '/discounts', to: 'discounts#index'
     #get '/:id/discounts/:discount_id/show', to: "discounts#show"
     get '/discounts/:discount_id/show', to: "discounts#show"
-
     get '/discounts/:discount_id/edit', to: "discounts#edit"
     patch '/discounts/:discount_id/edit', to: "discounts#update"
+    delete ":discount_id/discounts", to: "discounts#destroy"
   end
 
   namespace :admin do
