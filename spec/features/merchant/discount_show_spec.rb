@@ -14,7 +14,7 @@ RSpec.describe 'As a merchant-employee' do
       fill_in :num_of_items, with: 15
       click_button 'Create Discount'
 
-      visit "/merchant/#{@merchant_1.id}/discounts/#{@merchant_1.discounts.first.id}/show"
+      visit "/merchant/discounts/#{@merchant_1.discounts.first.id}/show"
       expect(page).to have_content(@merchant_1.discounts.first.percent )
       expect(page).to have_content(@merchant_1.discounts.first.num_of_items)
       expect(page).to have_link("Edit Discount")

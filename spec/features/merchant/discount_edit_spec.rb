@@ -14,12 +14,49 @@ RSpec.describe 'As a merchant-employee' do
     fill_in :num_of_items, with: 15
     click_button 'Create Discount'
 
-
     visit "/merchant/discounts/#{@merchant_1.discounts.first.id}/edit"
-    expect(page).to have_content("Edit Discount")
+    expect(page).to have_content("Update Your Discount")
     expect(page).to have_content("Change name")
     expect(page).to have_content("Change amount of items")
     expect(page).to have_content("Change percentage off")
     expect(page).to have_button("Update Discount")
   end
+
+  it "is able to update the info" do
+    visit "/merchant/#{@merchant_1.id}/discounts"
+    fill_in :name, with: "FIRE sell. OMG A FIRE sell"
+    fill_in :percent, with: 10
+    fill_in :num_of_items, with: 15
+    click_button 'Create Discount'
+
+    visit "/merchant/discounts/#{@merchant_1.discounts.first.id}/edit"
+
+    fill_in :name, with: "qwerty"
+    fill_in :percent, with: 9
+    fill_in :num_of_items, with: 17
+    click_button 'Update Discount'
+    expect(current_path).to eq("/merchant/discounts")
+
+    visit "/merchant/discounts/#{@merchant_1.discounts.first.id}/show"
+    expect(page).to have_content("Discount name: qwerty")
+    expect(page).to have_content("Percentage off: 9")
+    expect(page).to have_content("Number of items needed: 17")
+  end
+
+  it "if fields are left blank there is an error" do
+    visit "/merchant/#{@merchant_1.id}/discounts"
+    fill_in :name, with: "FIRE sell. OMG A FIRE sell"
+    fill_in :percent, with: 10
+    fill_in :num_of_items, with: 15
+    click_button 'Create Discount'
+
+    visit "/merchant/discounts/#{@merchant_1.discounts.first.id}/edit"
+
+    fill_in :name, with: "qwerty"
+    fill_in :percent, with: 9
+    click_button 'Update Discount'
+    expect(current_path).to eq("/merchant/discounts/#{@merchant_1.discounts.first.id}/edit")
+    expect(page).to have_content("Num of items can't be blank")
+  end
+
 end
