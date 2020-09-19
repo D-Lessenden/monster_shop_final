@@ -1,0 +1,14 @@
+<h2>Update Your Discount</h2>
+<%= form_with model: @merchant, method: :patch, local: true do |f| %>
+
+  <%= f.label "Change Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Change Percentage Off" %>
+  <%= f.text_field :percent %>
+
+  <%= f.label "Change Amount of Items" %>
+  <%= f.text_field :num_of_items %>
+
+  <%= f.submit 'Update Discount' %>
+<% end %>
