@@ -71,12 +71,11 @@ RSpec.describe 'Merchant Dashboard' do
       visit '/merchant'
       click_on("Create Discount")
       expect(current_path).to eq("/merchant/#{@merchant_1.id}/discounts")
-      save_and_open_page
       expect(page).to have_content("Create A New Discount")
-      expect(page).to have_content("Dicount Name")
-      expect(page).to have_content("Number of Items")
-      expect(page).to have_content("Percentage")
-      expect(page).to have_link("Create Discount")
+      expect(page).to have_content("Discount name")
+      expect(page).to have_content("Minimum amount of items")
+      expect(page).to have_content("Percentage off")
+      expect(page).to have_button("Create Discount")
     end
   end
 end
