@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  percent: 1
+  num_of_items: 1
+  merchants: one
+
+two:
+  name: MyString
+  percent: 1
+  num_of_items: 1
+  merchants: two

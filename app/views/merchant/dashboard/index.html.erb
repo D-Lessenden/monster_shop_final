@@ -1,8 +1,12 @@
 <h2><%= link_to @merchant.name %></h2>
 <p><%= @merchant.address %></p>
 <p><%= @merchant.city %> <%= @merchant.state %> <%= @merchant.zip %></p>
-
+<%#binding.pry %>
 <%= link_to 'My Items', '/merchant/items' %>
+<br>
+<%= link_to "Create Discount", "/merchant/#{@merchant.id}/discounts" %>
+<br>
+<br>
 
 <section class="orders">
   <% @merchant.pending_orders.each do |order| %>
