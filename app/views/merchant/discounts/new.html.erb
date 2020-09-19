@@ -1,13 +1,13 @@
 <h2>Create A New Discount</h2>
-<%= form_with model: @discount, local: true do |f| %>
+<%= form_with model: @merchant, local: true do |f| %>
 
-  <%= f.label :name %>
+  <%= f.label "Discount Name" %>
   <%= f.text_field :name %>
 
-  <%= f.label :percent %>
+  <%= f.label "Percentage Off" %>
   <%= f.text_field :percent %>
 
-  <%= f.label :num_of_items1 %>
+  <%= f.label "Minimum Amount of Items" %>
   <%= f.text_field :num_of_items %>
 
   <%= f.submit 'Create Discount' %>
