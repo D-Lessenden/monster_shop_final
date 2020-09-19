@@ -4,3 +4,5 @@
 <%= link_to "Edit Discount", "/merchant/discounts/#{@discount.id}/edit" %>
 <br>
 <%= link_to "My Discounts", "/merchant/discounts" %>
+<br>
+<%= link_to "Delete Discount", "/merchant/#{@discount.id}/discounts", method: :delete %>
