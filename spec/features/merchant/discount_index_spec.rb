@@ -19,4 +19,13 @@ RSpec.describe 'As a merchant-employee' do
       click_on "#{@merchant_1.discounts.first.name}"
       expect(current_path).to eq("/merchant/discounts/#{@merchant_1.discounts.first.id}/show")
     end
+
+    it 'has a link to create a discount' do
+      visit "/merchant/discounts"
+      expect(page).to have_content("Create Discount")
+      click_on "Create Discount"
+      expect(current_path).to eq("/merchant/#{@merchant_1.id}/discounts")
+
+    end
+
 end
