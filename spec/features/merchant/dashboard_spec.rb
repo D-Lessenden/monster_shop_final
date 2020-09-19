@@ -29,7 +29,6 @@ RSpec.describe 'Merchant Dashboard' do
 
     it 'I do not have a link to edit the merchant information' do
       visit '/merchant'
-
       expect(page).to_not have_link('Edit')
     end
 
@@ -62,5 +61,24 @@ RSpec.describe 'Merchant Dashboard' do
 
       expect(current_path).to eq("/merchant/orders/#{@order_2.id}")
     end
+
+    it 'has a link to create a discount' do
+      visit '/merchant'
+      expect(page).to have_link("Create Discount")
+    end
+
+    it 'the link to the discount page is functional' do
+      visit '/merchant'
+      click_on("Create Discount")
+      expect(current_path).to eq("/merchant/#{@merchant_1.id}/discounts")
+      save_and_open_page
+      expect(page).to have_content("Create Discount")
+      expect(page).to have_content("Dicount Name")
+      expect(page).to have_content("Number of Items")
+      expect(page).to have_content("Percentage")
+
+
+    end
+
   end
 end
