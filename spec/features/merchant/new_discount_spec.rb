@@ -16,7 +16,7 @@ RSpec.describe 'New Merchant Discount' do
       click_button 'Create Discount'
 
       expect(current_path).to eq("/merchant/discounts")
-      expect(page).to have_link(@merchant_1.discounts.first.name})
+      expect(page).to have_link(@merchant_1.discounts.first.name)
       expect(page).to have_content("Percent: #{@merchant_1.discounts.first.percent}")
       expect(page).to have_content("Minimum amount of items: #{@merchant_1.discounts.first.num_of_items}")
 
