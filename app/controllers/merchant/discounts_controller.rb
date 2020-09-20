@@ -1,12 +1,11 @@
 class Merchant::DiscountsController < Merchant::BaseController
-  # before_action :find only, [:edit, ]
+  before_action :find_discount_id, only: [:edit, :show, :update]
 
   def index
     @discounts = current_user.merchant.discounts
   end
 
   def show
-     @discount = Discount.find(params[:discount_id])
   end
 
   def new
@@ -25,11 +24,9 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def edit
-    @discount = Discount.find(params[:discount_id])
   end
 
   def update
-    @discount = Discount.find(params[:discount_id])
     if @discount.update(discount_params)
       redirect_to "/merchant/discounts"
     else
@@ -43,9 +40,9 @@ class Merchant::DiscountsController < Merchant::BaseController
     redirect_to "/merchant/discounts"
   end
 
-  # def find
-  #   @discount = Discount.find(params[:discount_id])
-  # end
+  def find_discount_id
+    @discount = Discount.find(params[:discount_id])
+  end
 
   private
   def discount_params
