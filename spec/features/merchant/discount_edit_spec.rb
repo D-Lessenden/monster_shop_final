@@ -54,9 +54,20 @@ RSpec.describe 'As a merchant-employee' do
 
     fill_in :name, with: "qwerty"
     fill_in :percent, with: 9
+    fill_in :num_of_items, with: ""
+
     click_button 'Update Discount'
     expect(current_path).to eq("/merchant/discounts/#{@merchant_1.discounts.first.id}/edit")
     expect(page).to have_content("Num of items can't be blank")
   end
 
+  it "has fields in the edit form that are prepopulated" do
+    discount = Discount.create(name: "FIRE sell. OMG A FIRE sell", percent: 15, num_of_items: 1, merchant_id: @merchant_1.id)
+
+    visit "/merchant/discounts/#{discount.id}/edit"
+
+    expect(page).to have_field(:name, with: discount.name)
+    expect(page).to have_field(:percent, with: discount.percent)
+    expect(page).to have_field(:num_of_items, with: discount.num_of_items)
+  end
 end
