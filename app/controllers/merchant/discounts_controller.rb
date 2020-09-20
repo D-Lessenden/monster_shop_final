@@ -1,4 +1,5 @@
 class Merchant::DiscountsController < Merchant::BaseController
+  # before_action :find only, [:edit, ]
 
   def index
     @discounts = current_user.merchant.discounts
@@ -36,6 +37,15 @@ class Merchant::DiscountsController < Merchant::BaseController
       render :edit
     end
   end
+
+  def destroy
+    Discount.destroy(params[:discount_id])
+    redirect_to "/merchant/discounts"
+  end
+
+  # def find
+  #   @discount = Discount.find(params[:discount_id])
+  # end
 
   private
   def discount_params
