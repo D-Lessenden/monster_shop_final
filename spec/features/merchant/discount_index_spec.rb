@@ -51,4 +51,18 @@ RSpec.describe 'As a merchant-employee' do
       expect(current_path).to eq("/merchant/discounts")
       expect(page).to_not have_content(discount1.name)
     end
+
+    it 'can have more than one discount' do
+      visit "/login"
+      fill_in :email, with: 'megan@example.com'
+      fill_in :password, with: @megan.password
+      click_button "Log In"
+
+      discount1 = Discount.create(name: "FIRE sell. OMG A FIRE sell", percent: 10, num_of_items: 15, merchant_id: @merchant_1.id)
+      discount2 = Discount.create(name: "DISCOUNT2", percent: 10, num_of_items: 15, merchant_id: @merchant_1.id)
+
+      visit "/merchant/discounts"
+      expect(page).to have_content(discount1.name)
+      expect(page).to have_content(discount2.name)
+    end 
 end
