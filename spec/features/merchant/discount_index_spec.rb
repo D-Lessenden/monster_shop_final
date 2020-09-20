@@ -19,4 +19,25 @@ RSpec.describe 'As a merchant-employee' do
       click_on "#{@merchant_1.discounts.first.name}"
       expect(current_path).to eq("/merchant/discounts/#{@merchant_1.discounts.first.id}/show")
     end
+
+    it 'has a link to create a discount' do
+      visit "/merchant/discounts"
+      expect(page).to have_content("Create Discount")
+      click_on "Create Discount"
+      expect(current_path).to eq("/merchant/#{@merchant_1.id}/discounts")
+    end
+
+    it 'has a link to delete a discount' do
+      visit "/merchant/#{@merchant_1.id}/discounts"
+      fill_in :name, with: "FIRE sell. OMG A FIRE sell"
+      fill_in :percent, with: 10
+      fill_in :num_of_items, with: 15
+      click_button 'Create Discount'
+
+      visit "/merchant/discounts"
+      expect(page).to have_content("Delete Discount")
+      click_on "Delete Discount"
+      expect(current_path).to eq("/merchant/discounts")
+      #expect(page).to_not have_content(@merchant_1.discounts.first.name)
+    end
 end

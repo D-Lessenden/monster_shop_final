@@ -20,8 +20,15 @@ class Cart
 
   def items
     @contents.map do |item_id, _|
-      Item.find(item_id)
+      item = Item.find(item_id)
+      discount = assess_discount(item)
+      item.price = item.price * (1 - (discount.percent / 100.0)) if discount
+      item
     end
+  end
+
+  def assess_discount(item)
+    discount = Discount.where(merchant_id: item.merchant.id).where("num_of_items <= ?", count_of(item.id)).max_by(&:percent)
   end
 
   def grand_total
