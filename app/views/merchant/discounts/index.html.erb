@@ -1,6 +1,5 @@
 <% current_user.merchant.discounts.each do |discount| %>
 <p><%= link_to "#{discount.name}", "/merchant/discounts/#{discount.id}/show" %></p>
-<p><%= link_to "Create Discount", "/merchant/#{current_user.merchant_id}/discounts" %></p>
 <p><%= link_to "Delete Discount", "/merchant/#{discount.id}/discounts", method: :delete %></p>
 <% end %>
 <br>
