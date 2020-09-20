@@ -69,6 +69,11 @@ RSpec.describe Cart do
      expect(@cart.subtotal_of(@ogre.id)).to eq(20)
      expect(@cart.subtotal_of(@giant.id)).to eq(90)
      expect(@cart.grand_total).to eq(110)
+
+     discount = Discount.create(name: "FIRE sell. OMG A FIRE sell", percent: 15, num_of_items: 1, merchant_id: @megan.id)
+     expect(@cart.subtotal_of(@ogre.id)).to eq(17)
+     expect(@cart.subtotal_of(@giant.id)).to eq(85)
+     expect(@cart.grand_total).to eq(102.0)
     end
   end
 end
