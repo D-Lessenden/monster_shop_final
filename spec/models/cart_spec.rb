@@ -64,7 +64,7 @@ RSpec.describe Cart do
       expect(@cart.count_of(@giant.id)).to eq(1)
     end
 
-    it '.apply_discount()' do
+    it '.assess_discount()' do
      discount = Discount.create(name: "FIRE sell. OMG A FIRE sell", percent: 10, num_of_items: 2, merchant_id: @megan.id)
      expect(@cart.subtotal_of(@ogre.id)).to eq(20)
      expect(@cart.subtotal_of(@giant.id)).to eq(90)
