@@ -21,13 +21,13 @@ class Cart
   def items
     @contents.map do |item_id, _|
       item = Item.find(item_id)
-      discount = apply_discount(item)
+      discount = assess_discount(item)
       item.price = item.price * (1 - (discount.percent / 100.0)) if discount
       item
     end
   end
 
-  def apply_discount(item)
+  def assess_discount(item)
     discount = Discount.where(merchant_id: item.merchant.id).where("num_of_items <= ?", count_of(item.id)).max_by(&:percent)
   end
 
@@ -35,7 +35,7 @@ class Cart
     total = 0
     @contents.map do |item_id, _|
       item = Item.find(item_id)
-      discount = apply_discount(item)
+      discount = assess_discount(item)
       item.price = item.price * (1 - (discount.percent / 100.0)) if discount
       total += @contents[item_id.to_s] * item.price
     end
@@ -48,7 +48,7 @@ class Cart
 
   def subtotal_of(item_id)
     item = Item.find(item_id)
-    discount = apply_discount(item)
+    discount = assess_discount(item)
     item.price = item.price * (1 - (discount.percent / 100.0)) if discount
     @contents[item_id.to_s] * item.price
   end
